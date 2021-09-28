@@ -1,12 +1,12 @@
 import java.util.List;
 
 /** MyProtocol
- * Allocate name for each operators and status
- * Making message using the name
+ * Enum for each operators and status
+ * Making message using the rule
  * */
 public class MyProtocol {
 
-    /** Operator's name in protocol*/
+    /** Operator in protocol*/
     public static enum Operator {
         ADD('+'), MIN('-'), DIV('/'), MUL('*');
 
@@ -23,7 +23,7 @@ public class MyProtocol {
             return null;
         }
     }
-    /** Status's name in protocol*/
+    /** Status in protocol*/
     public static enum Status {
         ANS(0), DIV0(1), ARG(2);
 
