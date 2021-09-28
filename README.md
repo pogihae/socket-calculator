@@ -1,17 +1,14 @@
-# socket-calculator
-
-calculator using TCP socket, thread
-
 ## How to run
 
-run cal[Server|Client]Demo 
+run " "Demo files
 
 ## Architecture
 - ### Stream
+  todo: picture
 
 - ### Protocol
   - #### Request MSG
-    (operator_num operators operands)
+    [operator_num operators operands]
     
     eg) (2 ADD DIV 2 6 3) <- (2 + 6 / 3 )
     
@@ -21,10 +18,11 @@ run cal[Server|Client]Demo
     
     eg) ANS 4
     
-    eg) DIV0! 5/0
+    eg) DIV0 5/0
   - #### Used Word
     operator: ADD(+) MIN(-) DIV(/) MUL(*)
     
-    status: ANS(success) DIV0!(divide by 0) ARG!(more or less operand)
+    status: ANS(success) DIV0(divide by 0) ARG(more or less operand)
 
 - ### Class
+  todo: picture
