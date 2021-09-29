@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.*;
 
 /** MyProtocol
  * Enum for each operators and status
@@ -45,7 +45,7 @@ public class MyProtocol {
      * make request message using rule in protocol
      * @return formed request message
      * */
-    public static String makeRequest(List<Character> operators, List<Double> operands) {
+    public static String makeRequest(Queue<Character> operators, Queue<Double> operands) {
         StringBuffer msg = new StringBuffer();
         msg.append(operators.size()+" ");
 
@@ -58,17 +58,17 @@ public class MyProtocol {
         }
 
         msg.setLength(msg.length() - 1);
-        return msg.toString();
+        return msg.toString() + "\n";
     }
 
     /** makeResponse
      * make response message using rule in protocol
      * @return formed response message
      * */
-    public static String makeResponse(int errCode, String content) {
+    public static String makeResponse(int code, String content) {
         StringBuffer msg = new StringBuffer();
-        msg.append(Status.convertToType(errCode)+" ");
+        msg.append(Status.convertToType(code)+" ");
         msg.append(content);
-        return msg.toString();
+        return msg.toString() + "\n";
     }
 }

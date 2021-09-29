@@ -1,28 +1,34 @@
 import java.net.*;
 import java.io.*;
 
-/**
- * @ https://stackoverflow.com/questions/10131377/socket-programming-multiple-client-to-one-server
+/**CalServer
  * @todo calculator
+ * @todo print
  * */
 public class CalServer {
     private ServerSocket welcomeSocket;
 
-    public CalServer(String ip, int port) {
+    /** Constructor
+     * bind welcome socket
+     * */
+    public CalServer(int port) {
         try {
-            welcomeSocket = new ServerSocket();
-            welcomeSocket.bind(new InetSocketAddress(ip, port));
+            welcomeSocket = new ServerSocket(port);
         } catch (Exception e) {
             //e.printStackTrace();
             System.out.println("ERR_SERVER_OPEN");
         }
     }
 
+    /** startServer
+     * waiting connect
+     * allocate one thread for one client
+     * */
     public void startServer() {
+        System.out.println("Server start...");
         while(true) {
             try {
                 Socket connectionSocket = welcomeSocket.accept();
-                System.out.println("Server start...");
 
                 CalServerThread cst = new CalServerThread(connectionSocket);
                 cst.start();
@@ -32,13 +38,24 @@ public class CalServer {
         }
     }
 
-    private class Calculator {
-        int errCode;
+    /** Calculator
+     * to make answer or error content
+     * */
+    private static class Calculator {
+        String msg;
+        int code;
         String content;
 
-        void exec(String requestMSG) { this.errCode = 0; this.content = "test"; }
+        Calculator(String msg) {
+            this.msg = msg.toUpperCase();
+        }
+
+        void exec() { this.code = 0; this.content = msg; }
     }
 
+    /** CalServerThread
+     * for multiple client
+     * */
     private class CalServerThread extends Thread {
         BufferedReader inFromClient;
         DataOutputStream outToClient;
@@ -60,12 +77,13 @@ public class CalServer {
 
             try {
                 String requestMSG = inFromClient.readLine();
-                while(!requestMSG.equalsIgnoreCase("end")) {
+                while(!requestMSG.equalsIgnoreCase("q")) {
+                    System.out.println(this.getName() + " received " + requestMSG);
 
-                    Calculator cal = new Calculator();
-                    cal.exec(requestMSG);
+                    Calculator cal = new Calculator(requestMSG);
+                    cal.exec();
 
-                    String responseMSG = MyProtocol.makeResponse(cal.errCode, cal.content);
+                    String responseMSG = MyProtocol.makeResponse(cal.code, cal.content);
                     outToClient.writeBytes(responseMSG);
 
                     requestMSG = inFromClient.readLine();
