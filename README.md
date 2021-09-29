@@ -3,8 +3,9 @@
 run " "Demo files
 
 ## Architecture
-- ### Stream
-  todo: picture
+- ### Flow
+  ![flow_chart](https://user-images.githubusercontent.com/76048647/135282514-92a48e00-5baf-4aaa-9f6e-2c6d7796029e.png)
+
 
 - ### Protocol
   - #### Request MSG
