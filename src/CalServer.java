@@ -76,8 +76,10 @@ public class CalServer {
             }
 
             try {
-                String requestMSG = inFromClient.readLine();
-                while(!requestMSG.equalsIgnoreCase("q")) {
+
+                while(true) {
+                    String requestMSG = inFromClient.readLine();
+                    if(requestMSG.equalsIgnoreCase("q")) break;
                     System.out.println(this.getName() + " received " + requestMSG);
 
                     Calculator cal = new Calculator(requestMSG);
@@ -85,19 +87,16 @@ public class CalServer {
 
                     String responseMSG = MyProtocol.makeResponse(cal.code, cal.content);
                     outToClient.writeBytes(responseMSG);
-
-                    requestMSG = inFromClient.readLine();
                 }
             } catch (Exception e) {
-                //e.printStackTrace();
-                System.out.println("ERR_SERVER_CALC");
+                e.printStackTrace();
             }
             finally {
                 try {
                     inFromClient.close();
                     outToClient.close();
                     connectionSocket.close();
-                    System.out.println("Socket closed");
+                    System.out.println(this.getName() + " closed");
                 } catch (Exception e) {
                     //e.printStackTrace();
                     System.out.println("ERR_SERVER_CLOSE");

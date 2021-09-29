@@ -37,13 +37,18 @@ public class CalClient {
         System.out.println("Start client");
 
         try {
-            String exp = " ";
-            while(!exp.equalsIgnoreCase("q")) {
+            while(true) {
                 Queue<Character> operators = new LinkedList<>();
                 Queue<Double> operands = new LinkedList<>();
 
-                System.out.print("EXP(end:quit): ");
-                exp = inFromUser.readLine();
+
+                System.out.print("EXP(q to quit): ");
+                String exp = inFromUser.readLine();
+
+                if(exp.equalsIgnoreCase("q")) {
+                    outToServer.writeBytes(exp);
+                    break;
+                }
 
                 decomposeExp(operators, operands, exp);
 
