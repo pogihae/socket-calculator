@@ -1,5 +1,9 @@
-import java.net.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -10,6 +14,7 @@ import java.util.Queue;
 A * */
 public class CalServer {
     private ServerSocket welcomeSocket;
+
 
     /** Constructor
      *
@@ -174,7 +179,7 @@ public class CalServer {
             }
             else if(operands.size() > 1) {
                 code = 2;
-                content = "Fewer operands";
+                content = "Too many operand";
                 return null;
             }
 
