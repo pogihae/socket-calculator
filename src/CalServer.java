@@ -147,7 +147,7 @@ public class CalServer {
                                     .getOpr());
                 } catch(IllegalArgumentException e) {
                     code = 3;
-                    content = "unknown operator(exp should be spaced one by one)";
+                    content = "wrong exp(should be spaced one by one)";
                     return null;
                 }
             }
