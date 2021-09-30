@@ -27,7 +27,7 @@
     
     * *status*
           
-          ANS(success) DIV0(divide by 0) ARG(more or less operand)
+          ANS(success) DIV0(divide by 0) ARG(more or less operand) WRG(wrong expression)
 
 - ### Class Flow
   
