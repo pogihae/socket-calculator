@@ -10,6 +10,10 @@ import java.util.Queue;
 public class CalClient {
     Socket clientSocket;
 
+    /** Constructor
+     *
+     * connecting server with given ip, port
+     * */
     public CalClient(String ip, int port){
         try {
             this.clientSocket = new Socket(ip, port);
@@ -19,6 +23,11 @@ public class CalClient {
         System.out.println("Connected!");
     }
 
+    /** startClient
+     *
+     * read expression message from user (exp should space one by one)
+     * send it and read result from server
+     * */
     public void startClient() {
         DataOutputStream outToServer = null;
         BufferedReader inFromUser = null;
@@ -34,13 +43,10 @@ public class CalClient {
             e.printStackTrace();
         }
 
-        System.out.println("Start client");
-
         try {
             while(true) {
                 Queue<Character> operators = new LinkedList<>();
                 Queue<Double> operands = new LinkedList<>();
-
 
                 System.out.print("EXP(q to quit): ");
                 String exp = inFromUser.readLine();
@@ -55,16 +61,14 @@ public class CalClient {
                 String requestMSG = MyProtocol.makeRequest(operators, operands);
                 outToServer.writeBytes(requestMSG);
 
-
                 String responseMSG = inFromServer.readLine();
-                System.out.println("\n"+responseMSG);
-
-                //exp = inFromUser.readLine();
+                System.out.println(responseMSG);
             }
         } catch (Exception e) {
             //e.printStackTrace();
             System.out.println("ERR_MAKE_EXP");
         }
+
         finally {
             try {
                 inFromUser.close();
@@ -78,22 +82,22 @@ public class CalClient {
         }
     }
 
+    /** decomposeExp
+     * decomposing exp to separate operator and operand
+     *
+     * non number to operator (even if it is not correct)
+     * number to operand
+     * */
     private void decomposeExp(Queue<Character> operators, Queue<Double> operands, String exp) {
         String[] elem = exp.split(" ");
 
         for(String s : elem) {
-            if(isNumeric(s)) operands.add(Double.parseDouble(s));
-            else operators.add(s.charAt(0));
-        }
-    }
-
-    public boolean isNumeric(String input) {
-        try {
-            Double.parseDouble(input);
-            return true;
-        }
-        catch (NumberFormatException e) {
-            return false;
+            try {
+                operands.add(Double.parseDouble(s));
+            }
+            catch (NumberFormatException e) {
+                operators.add(s.charAt(0));
+            }
         }
     }
 }
