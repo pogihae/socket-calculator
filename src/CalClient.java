@@ -3,9 +3,10 @@ import java.net.*;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/**
- * @todo comment
- * @todo print
+/** CalClient
+ *
+ * with TCP connection
+ * print expression's answer calculated in server
  * */
 public class CalClient {
     Socket clientSocket;
@@ -19,14 +20,16 @@ public class CalClient {
             this.clientSocket = new Socket(ip, port);
         } catch (IOException e) {
             System.out.println("ERR_CONNECTION");
+            return;
         }
-        System.out.println("Connected!");
+        System.out.println("Connected! with "+ip+" port: "+port);
     }
 
     /** startClient
      *
-     * read expression message from user (exp should space one by one)
+     * read expression message from user (exp should be spaced one by one)
      * send it and read result from server
+     * end with 'q'
      * */
     public void startClient() {
         DataOutputStream outToServer = null;

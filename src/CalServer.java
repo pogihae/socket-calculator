@@ -7,8 +7,7 @@ import java.util.Queue;
  *
  * with TCP connection
  * available multi-client connection
- * @todo data file read
- * */
+A * */
 public class CalServer {
     private ServerSocket welcomeSocket;
 
@@ -148,7 +147,7 @@ public class CalServer {
                                     .getOpr());
                 } catch(IllegalArgumentException e) {
                     code = 3;
-                    content = "unknown operator(you should space one by one)";
+                    content = "unknown operator(exp should be spaced one by one)";
                     return null;
                 }
             }
