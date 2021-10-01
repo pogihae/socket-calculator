@@ -52,15 +52,15 @@ public class MyProtocol {
      * @return formed request message
      * */
     public static String makeRequest(Queue<Character> operators, Queue<Double> operands) {
-        StringBuffer msg = new StringBuffer();
-        msg.append(operators.size()+" ");
+        StringBuilder msg = new StringBuilder();
+        msg.append(operators.size()).append(" ");
 
         for(char c : operators) {
-            msg.append(Operator.convertToType(c)+" ");
+            msg.append(Operator.convertToType(c)).append(" ");
         }
 
         for(double d : operands) {
-            msg.append(d+" ");
+            msg.append(d).append(" ");
         }
 
         msg.setLength(msg.length() - 1);
@@ -73,9 +73,7 @@ public class MyProtocol {
      * @return formed response message
      * */
     public static String makeResponse(int code, String content) {
-        StringBuffer msg = new StringBuffer();
-        msg.append(Status.convertToType(code)+": ");
-        msg.append(content);
+        String msg = Status.convertToType(code) + ": " + content;
         return msg + "\n";
     }
 }

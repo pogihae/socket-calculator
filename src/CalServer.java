@@ -52,7 +52,7 @@ public class CalServer {
      * read message from client and interpret it
      * send message with result
      * */
-    private class CalServerThread extends Thread {
+    private static class CalServerThread extends Thread {
         BufferedReader inFromClient;
         DataOutputStream outToClient;
         Socket connectionSocket;
