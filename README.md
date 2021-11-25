@@ -6,7 +6,7 @@ Socket Calculator is a Server - Client program with TCP connection. Server allow
     run Demo files with up to JAVA 8
 
 ## Architecture
-- ### Flow chart
+- ###
   ![flow_chart](https://user-images.githubusercontent.com/76048647/135282514-92a48e00-5baf-4aaa-9f6e-2c6d7796029e.png)
 
 
